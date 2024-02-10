@@ -293,7 +293,7 @@ uncommands = Seq.fromList >=> f
 --
 -- is not possible.
 feats :: Seq BL.ByteString -> Seq Value.Value -> Seq Feature.Feature -> Either Text Feats
-feats _ _ Seq.Empty = Left "VectorTile.features: `[RawFeature]` empty"
+feats _ _ Seq.Empty = Right (Feats mempty mempty mempty)
 feats keys vals fs = foldlM g (Feats mempty mempty mempty) fs
   where f :: ProtobufGeom g => Feature.Feature -> Either Text (VT.Feature (GeomVec g))
         f x = VT.Feature
